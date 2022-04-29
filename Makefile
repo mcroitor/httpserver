@@ -1,4 +1,4 @@
-CC=g++
+CC=/usr/bin/g++
 BUILD_DIR=build
 OBJ_DIR=obj
 COMPILE_OPT=-O2 -std=c++17 -Wall -Werror -Wextra -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function
