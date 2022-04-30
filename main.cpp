@@ -3,14 +3,9 @@
 #include <string>
 #include <iostream>
 
+#include "defaults.hpp"
 #include "server.hpp"
 #include "lib.hpp"
-
-const size_t DEFAULT_PORT = 80;
-const std::string DEFAULT_HOST = "localhost";
-const std::string DEFAULT_ROOT_DIR = "./html/";
-
-const std::string CONFIG_FILE = "config.ini";
 
 int main(int argc, char const *argv[]) 
 {

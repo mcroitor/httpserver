@@ -5,9 +5,6 @@
 #include <netinet/in.h>
 #include <string>
 
-const std::size_t BUFFER_SIZE = 1024;
-const int MAX_CONNECTION = 10;
-
 class server{
 	int _server_fd;
 	int _new_socket;

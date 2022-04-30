@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unistd.h>
 
+#include "defaults.hpp"
 #include "server.hpp"
 #include "request.hpp"
 #include "response.hpp"
