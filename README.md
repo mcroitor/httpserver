@@ -2,13 +2,12 @@
 Simple HTTP server.
 
 ## Build
-Create folders for output and make:
+Just make:
 
 ```bash
-$ mkdir obj
-$ mkdir build
 $ make
 ```
+The folder `build` will be created with `server` application.
 
 ## Start
 

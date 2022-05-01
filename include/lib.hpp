@@ -5,12 +5,18 @@
 #include <vector>
 #include <map>
 
+/**
+ * @brief 
+ * 
+ */
 struct server_config
 {
 	std::string host;
 	std::size_t port;
 	std::string root_dir;
 };
+
+typedef std::map<std::string, std::string> keymap;
 
 enum class status_code : uint16_t
 {
@@ -45,11 +51,59 @@ struct mimetype
 	static const std::map<std::string, std::string> from_extension;
 };
 
+// common functions
+
+/**
+ * @brief remove white spaces
+ * 
+ * @param str 
+ * @param whitespace 
+ * @return std::string 
+ */
 std::string trim(const std::string &str, const std::string &whitespace = " \t\n\r\v\f");
+/**
+ * @brief explode a string in chunks by delimiter.
+ * 
+ * @param str 
+ * @param delimiter 
+ * @return std::vector<std::string> 
+ */
 std::vector<std::string> explode(const std::string &str, const std::string &delimiter = " ");
+/**
+ * @brief load data from file
+ * 
+ * @param file_name 
+ * @return std::string 
+ */
 std::string file_get_contents(const std::string &file_name);
+/**
+ * @brief extract extention from file name
+ * 
+ * @param file_name 
+ * @return std::string 
+ */
 std::string extension(const std::string &file_name);
 
+// project specific functions
+/**
+ * @brief read server configuration
+ * 
+ * @param config 
+ * @param config_file 
+ * @return server_config 
+ */
 server_config read_config(server_config &config, const std::string &config_file);
+
+/**
+ * @brief server usage 
+ * 
+ */
+void usage();
+
+/**
+ * @brief generate default configuration file
+ * 
+ */
+void default_config();
 
 #endif

@@ -1,9 +1,13 @@
 CC=/usr/bin/g++
+SRC_DIR=src
+INCLUDE_DIR=include
 BUILD_DIR=build
 OBJ_DIR=obj
 COMPILE_OPT=-O2 -std=c++17 -Wall \
-	-Werror -Wextra -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function
+	-Werror -Wextra -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function \
+	-I$(INCLUDE_DIR)
 BUILD_OPT=-g -lstdc++ -lm -static
+DEPS=-lproperties
 
 all: $(OBJ_DIR) $(BUILD_DIR) server
 
@@ -13,20 +17,20 @@ $(OBJ_DIR):
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
-main.o: main.cpp
-	$(CC) $(COMPILE_OPT) -c main.cpp -o $(OBJ_DIR)/main.o
+main.o: $(SRC_DIR)/main.cpp
+	$(CC) $(COMPILE_OPT) -c $(SRC_DIR)/main.cpp -o $(OBJ_DIR)/main.o
 
-server.o: server.cpp
-	$(CC) $(COMPILE_OPT) -c server.cpp -o $(OBJ_DIR)/server.o
+server.o: $(SRC_DIR)/server.cpp
+	$(CC) $(COMPILE_OPT) -c $(SRC_DIR)/server.cpp -o $(OBJ_DIR)/server.o
 
-request.o: request.cpp
-	$(CC) $(COMPILE_OPT) -c request.cpp -o $(OBJ_DIR)/request.o
+request.o: $(SRC_DIR)/request.cpp
+	$(CC) $(COMPILE_OPT) -c $(SRC_DIR)/request.cpp -o $(OBJ_DIR)/request.o
 
-response.o: response.cpp
-	$(CC) $(COMPILE_OPT) -c response.cpp -o $(OBJ_DIR)/response.o
+response.o: $(SRC_DIR)/response.cpp
+	$(CC) $(COMPILE_OPT) -c $(SRC_DIR)/response.cpp -o $(OBJ_DIR)/response.o
 
-lib.o: lib.cpp
-	$(CC) $(COMPILE_OPT) -c lib.cpp -o $(OBJ_DIR)/lib.o
+lib.o: $(SRC_DIR)/lib.cpp
+	$(CC) $(COMPILE_OPT) -c $(SRC_DIR)/lib.cpp -o $(OBJ_DIR)/lib.o
 
 server: main.o server.o request.o response.o lib.o
 	$(CC) $(BUILD_OPT) $(OBJ_DIR)/main.o $(OBJ_DIR)/server.o \
