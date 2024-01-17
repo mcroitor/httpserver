@@ -4,106 +4,123 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <cstdint>
 
-/**
- * @brief 
- * 
- */
-struct server_config
+namespace server
 {
-	std::string host;
-	std::size_t port;
-	std::string root_dir;
-};
+	/**
+	 * @brief
+	 *
+	 */
+	struct config
+	{
+		std::string host;
+		std::size_t port;
+		std::string root_dir;
+	};
 
-typedef std::map<std::string, std::string> keymap;
+	typedef std::map<std::string, std::string> keymap;
 
-enum class status_code : uint16_t
-{
-	ok = 200,
-	bad_request = 400,
-	not_found = 404,
-	internal_server_error = 500
-};
+	enum class status_code : uint16_t
+	{
+		ok = 200,
+		bad_request = 400,
+		not_found = 404,
+		internal_server_error = 500
+	};
 
-const std::map<status_code, std::string> status_message = {
-	{status_code::ok, "OK"},
-	{status_code::bad_request, "Bad Request"},
-	{status_code::not_found, "Not Found"},
-	{status_code::internal_server_error, "Internal Server Error"}};
+	const std::map<status_code, std::string> status_message = {
+		{status_code::ok, "OK"},
+		{status_code::bad_request, "Bad Request"},
+		{status_code::not_found, "Not Found"},
+		{status_code::internal_server_error, "Internal Server Error"}};
 
-struct mimetype
-{
-	const static std::string html;
-	const static std::string css;
-	const static std::string js;
-	const static std::string txt;
-	const static std::string jpg;
-	const static std::string png;
-	const static std::string gif;
-	const static std::string ico;
-	const static std::string svg;
-	const static std::string json;
-	const static std::string xml;
-	const static std::string pdf;
-	const static std::string zip;
+	const std::vector<std::string> keys = {
+		"host", "port", "root_dir"};
 
-	static const std::map<std::string, std::string> from_extension;
-};
+	struct mimetype
+	{
+		const static std::string html;
+		const static std::string css;
+		const static std::string js;
+		const static std::string txt;
+		const static std::string jpg;
+		const static std::string png;
+		const static std::string gif;
+		const static std::string ico;
+		const static std::string svg;
+		const static std::string json;
+		const static std::string xml;
+		const static std::string pdf;
+		const static std::string zip;
 
-// common functions
+		static const std::map<std::string, std::string> from_extension;
+	};
 
-/**
- * @brief remove white spaces
- * 
- * @param str 
- * @param whitespace 
- * @return std::string 
- */
-std::string trim(const std::string &str, const std::string &whitespace = " \t\n\r\v\f");
-/**
- * @brief explode a string in chunks by delimiter.
- * 
- * @param str 
- * @param delimiter 
- * @return std::vector<std::string> 
- */
-std::vector<std::string> explode(const std::string &str, const std::string &delimiter = " ");
-/**
- * @brief load data from file
- * 
- * @param file_name 
- * @return std::string 
- */
-std::string file_get_contents(const std::string &file_name);
-/**
- * @brief extract extention from file name
- * 
- * @param file_name 
- * @return std::string 
- */
-std::string extension(const std::string &file_name);
+	// common functions
 
-// project specific functions
-/**
- * @brief read server configuration
- * 
- * @param config 
- * @param config_file 
- * @return server_config 
- */
-server_config read_config(server_config &config, const std::string &config_file);
+	/**
+	 * @brief remove white spaces
+	 *
+	 * @param str
+	 * @param whitespace
+	 * @return std::string
+	 */
+	std::string trim(const std::string &str, const std::string &whitespace = " \t\n\r\v\f");
+	/**
+	 * @brief explode a string in chunks by delimiter.
+	 *
+	 * @param str
+	 * @param delimiter
+	 * @return std::vector<std::string>
+	 */
+	std::vector<std::string> explode(const std::string &str, const std::string &delimiter = " ");
+	/**
+	 * @brief load data from file
+	 *
+	 * @param file_name
+	 * @return std::string
+	 */
+	std::string file_get_contents(const std::string &file_name);
+	/**
+	 * @brief extract extention from file name
+	 *
+	 * @param file_name
+	 * @return std::string
+	 */
+	std::string extension(const std::string &file_name);
 
-/**
- * @brief server usage 
- * 
- */
-void usage();
+	// project specific functions
+	/**
+	 * @brief read server configuration
+	 *
+	 * @param cfg
+	 * @param config_file
+	 * @return config
+	 */
+	config read_config(config &cfg, const std::string &config_file);
 
-/**
- * @brief generate default configuration file
- * 
- */
-void default_config();
+	/**
+	 * @brief server usage
+	 *
+	 */
+	void usage();
+
+	/**
+	 * @brief generate default configuration file
+	 *
+	 */
+	void default_config();
+
+	/**
+	 * @brief current time to string
+	 * 
+	 * @return std::string 
+	 */
+	std::string timestamp();
+
+	std::string to_string(const config& cfg);
+
+}
 
 #endif

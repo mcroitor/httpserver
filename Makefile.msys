@@ -1,0 +1,35 @@
+CXX=g++
+SOURCE_DIR=src
+INCLUDE_DIR=include
+BUILD_DIR=build
+OBJ_DIR=obj
+COMPILE_OPTS=-O2 -std=c++17 -Wall \
+	-Werror -Wextra -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function \
+	-I$(INCLUDE_DIR)
+LINK_OPTS=-g -lstdc++ -lm -static
+DEPS=-lproperties
+
+SOURCES = $(wildcard ${SOURCE_DIR}/*.cpp)
+OBJECTS = $(SOURCES:${SOURCE_DIR}/%.cpp=${OBJ_DIR}/%.o)
+
+APPNAME=server
+
+all: ${OBJ_DIR} ${BUILD_DIR} ${BUILD_DIR}/${APPNAME}
+
+${OBJ_DIR}:
+	mkdir -p ${OBJ_DIR}
+
+${BUILD_DIR}:
+	mkdir -p ${BUILD_DIR}
+
+${OBJ_DIR}/%.o: ${SOURCE_DIR}/%.cpp
+	${CXX} ${COMPILE_OPTS} -c -o $@ $<
+
+${BUILD_DIR}/${APPNAME}: ${OBJECTS}
+	${CXX} ${OBJECTS} -o ${BUILD_DIR}/${APPNAME} ${LINK_OPTIONS}
+
+clean:
+	rm -rf ${OBJ_DIR} $(BUILD_DIR)
+
+start:
+	${BUILD_DIR}/${APPNAME}

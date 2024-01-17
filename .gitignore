@@ -35,3 +35,11 @@
 .vscode
 build
 obj
+
+# cmake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+
+# pvs
+pvs/
