@@ -60,6 +60,24 @@ namespace server
 	// common functions
 
 	/**
+	 * @brief remove white spaces from left side of string
+	 *
+	 * @param str
+	 * @param whitespace
+	 * @return std::string
+	 */
+	std::string ltrim(const std::string &str, const std::string &whitespace = " \t\n\r\v\f");
+
+	/**
+	 * @brief remove whitespace from right side of string
+	 * 
+	 * @param str 
+	 * @param whitespace 
+	 * @return std::string 
+	 */
+	std::string rtrim(const std::string &str, const std::string &whitespace = " \t\n\r\v\f");
+	
+	/**
 	 * @brief remove white spaces
 	 *
 	 * @param str
@@ -114,12 +132,12 @@ namespace server
 
 	/**
 	 * @brief current time to string
-	 * 
-	 * @return std::string 
+	 *
+	 * @return std::string
 	 */
 	std::string timestamp();
 
-	std::string to_string(const config& cfg);
+	std::string to_string(const config &cfg);
 
 }
 
