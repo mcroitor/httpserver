@@ -12,7 +12,9 @@ namespace server
         write_message("[info]", message);
     }
     void logger::debug(const std::string &message){
-        write_message("[debug]", message);
+        if(debugEnabled){
+            write_message("[debug]", message);
+        }
     }
     void logger::warn(const std::string &message){
         write_message("[warn]", message);

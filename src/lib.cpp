@@ -37,11 +37,30 @@ namespace server
         {"zip", mimetype::zip},
     };
 
+    std::string ltrim(const std::string &str, const std::string &whitespace){
+        if(str.empty()) {
+            return str;
+        }
+        std::size_t str_begin = str.find_first_not_of(whitespace);
+        return str.substr(str_begin);
+    }
+
+    std::string rtrim(const std::string &str, const std::string &whitespace){
+        if(str.empty()) {
+            return str;
+        }
+        std::size_t str_end = str.find_last_not_of(whitespace);
+        return str.substr(0, str_end+1);
+    }
+
+
     std::string trim(const std::string &str, const std::string &whitespace)
     {
-        std::size_t str_begin = str.find_first_not_of(whitespace);
-        std::size_t str_end = str.find_last_not_of(whitespace);
-        return str.substr(str_begin, str_end - str_begin + 1);
+        if(str.empty()) {
+            return str;
+        }
+
+        return ltrim(rtrim(str, whitespace), whitespace);
     }
 
     std::vector<std::string> explode(const std::string &str, const std::string &delimiter)
@@ -105,14 +124,13 @@ namespace server
         std::map<std::string, std::string> options;
         while (std::getline(fin, line))
         {
-            logger().debug(line);
+            // trim line
+            line = trim(line);
             if (line.empty() || line[0] == '#')
             {
                 continue;
             }
 
-            // trim line
-            line = trim(line);
             std::vector<std::string> tokens = explode(line, "=");
 
             if (tokens.size() != 2)
