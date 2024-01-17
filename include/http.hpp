@@ -32,7 +32,7 @@ namespace server
 		std::string host() const;
 		std::string port() const;
 		std::string root_dir() const;
-		void set_root_dir(std::string root_dir_);
+		void set_root_dir(const std::string& root_dir_);
 		int close();
 	};
 
