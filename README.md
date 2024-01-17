@@ -11,13 +11,10 @@ The folder `build` will be created with `server` application.
 
 ## Start
 
-Create a folder for HTML site and place your site in this folder, run server:
+The project contains default site folder `html`, you can customize files in it. For running do:
 
 ```bash
-$ cd build
-$ mkdir html
-$ echo "<h2>Hello World</h2>" > html/index.html
-$ ./server
+$ make start
 ```
 
 And access http://localhost from your browser.

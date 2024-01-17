@@ -3,19 +3,22 @@
 
 #include <string>
 
-class server_request {
-    std::string raw;
-    std::string _method;
-    std::string _path;
-    std::string _query;
+namespace server
+{
+    class request
+    {
+        std::string raw;
+        std::string _method;
+        std::string _path;
+        std::string _query;
 
-public:
-    server_request(const std::string& request_);
-    void parse();
-    std::string method() const;
-    std::string path() const;
-    std::string query() const;
-
-};
+    public:
+        request(const std::string &request_);
+        void parse();
+        std::string method() const;
+        std::string path() const;
+        std::string query() const;
+    };
+}
 
 #endif
