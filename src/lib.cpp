@@ -76,10 +76,10 @@ namespace server
             {
                 break;
             }
-            result.push_back(str.substr(last_pos, pos - last_pos));
+            result.emplace_back(str.substr(last_pos, pos - last_pos));
             last_pos = pos + delimiter.length();
         }
-        result.push_back(str.substr(last_pos));
+        result.emplace_back(str.substr(last_pos));
 
         return result;
     }
@@ -140,7 +140,7 @@ namespace server
             tokens[0] = trim(tokens[0]);
             tokens[1] = trim(tokens[1]);
 
-            options.insert({tokens[0], tokens[1]});
+            options.emplace(std::make_pair(tokens[0], tokens[1]));
         }
         if (options.count("host"))
         {

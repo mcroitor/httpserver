@@ -2,11 +2,9 @@
 
 namespace server
 {
-    response::response(server::status_code status_code_, std::string content_type_, std::string content_)
+    response::response(server::status_code status_code_, std::string content_type_, std::string content_):
+        _status_code{status_code_}, _content_type{content_type_}, _body{content_}
     {
-        _status_code = status_code_;
-        _content_type = content_type_;
-        _body = content_;
     }
 
     std::string response::body() const
