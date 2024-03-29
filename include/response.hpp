@@ -18,7 +18,7 @@ namespace server
         response(server::status_code status_code_, std::string content_type_, std::string content_);
 
         std::string body() const;
-        server::status_code status_code() const;
+        server::status_code get_status_code() const;
         std::string status_message() const;
         std::string content_type() const;
 

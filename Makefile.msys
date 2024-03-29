@@ -12,7 +12,7 @@ DEPS=-lproperties
 SOURCES = $(wildcard ${SOURCE_DIR}/*.cpp)
 OBJECTS = $(SOURCES:${SOURCE_DIR}/%.cpp=${OBJ_DIR}/%.o)
 
-APPNAME=server
+APPNAME=httpserver
 
 all: ${OBJ_DIR} ${BUILD_DIR} ${BUILD_DIR}/${APPNAME}
 

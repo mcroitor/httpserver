@@ -43,3 +43,5 @@ cmake_install.cmake
 
 # pvs
 pvs/
+.PVS-Studio/
+*.dfo

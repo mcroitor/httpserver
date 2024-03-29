@@ -6,11 +6,19 @@ Simple HTTP server.
 
 You can use cmake tool to build.
 
-I personal use custom makefile. Just make:
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+
+I use custom makefile. Just make:
 
 ```bash
-$ make -f Makefile.msys
+make -f Makefile.msys
 ```
+
 The folder `build` will be created with `server` application.
 
 ## Configuration
@@ -33,14 +41,29 @@ root_dir=./html
 The project contains default site folder `html`, you can customize files in it. For running do:
 
 ```bash
-$ make -f Makefile.msys start
+make -f Makefile.msys start
 ```
 
-And access http://localhost:8080 from your browser.
+And access `http://localhost:8080` from your browser.
+
+## Docker version
+
+You also can try to use docker version. Just build image and run container:
+
+```bash
+docker build -t httpserver .
+docker run -d -p 8080:8080 --name httpserver httpserver
+```
+
+The site is placed int the `/html` directory by default, you can mount your own site directory:
+
+```bash
+docker run -d -p 8080:8080 -v /path/to/your/site:/html --name httpserver httpserver
+```
 
 ## TODO
 
- * ~~config file~~
- * ~~check config~~
- * start arguments
- * definitions to config file
+- ~~config file~~
+- ~~check config~~
+- start arguments
+- definitions to config file

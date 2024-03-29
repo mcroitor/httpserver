@@ -28,7 +28,7 @@ namespace server
 		}
 
 		// Setting socket options
-		const size_t SO_REUSEPORT = 0;
+		// const size_t SO_REUSEPORT = 0;
 		if (setsockopt(_server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &_opt, sizeof(_opt)))
 		{
 			logger().error("setsockopt");
@@ -100,7 +100,7 @@ namespace server
 		server::response response {status_code, content_type, page};
 
 		logger().info(std::string("Response: ") +
-			std::to_string((uint16_t)response.status_code()) +
+			std::to_string((uint16_t)response.get_status_code()) +
 			std::string(" ") +
 			response.status_message());
 
