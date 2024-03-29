@@ -12,7 +12,7 @@ namespace server
         return _body;
     }
 
-    server::status_code response::status_code() const
+    server::status_code response::get_status_code() const
     {
         return _status_code;
     }
