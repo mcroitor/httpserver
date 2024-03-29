@@ -10,12 +10,16 @@
 
 namespace server
 {
-	http::http(std::string host_, std::size_t port_)
+	http::http(std::string host_, std::size_t port_):
+		_host{host_},
+		_port{port_},
+		_opt{1},
+		_addrlen {sizeof(_address)},
+		_server_fd {0},
+		_new_socket {0},
+		_buffer {},
+		_address {}
 	{
-		_host = host_;
-		_port = port_;
-		_opt = 1;
-		_addrlen = sizeof(_address);
 	}
 
 	int http::start()
@@ -129,7 +133,7 @@ namespace server
 		return _root_dir;
 	}
 
-	void http::set_root_dir(std::string root_dir_)
+	void http::set_root_dir(const std::string& root_dir_)
 	{
 		_root_dir = root_dir_;
 	}
