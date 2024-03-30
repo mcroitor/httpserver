@@ -61,9 +61,17 @@ The site is placed int the `/html` directory by default, you can mount your own 
 docker run -d -p 8080:8080 -v /path/to/your/site:/html --name httpserver httpserver
 ```
 
+Docker Compose is also supported:
+
+```bash
+docker-compose up -d
+```
+
 ## TODO
 
 - ~~config file~~
 - ~~check config~~
 - start arguments
 - definitions to config file
+- proxy
+- logging
