@@ -133,7 +133,7 @@ namespace server
 			content = file_get_contents(file_name);
 			status_code = content.size() > 0 ? status_code::ok : status_code::not_found;
 		}
-		catch (std::runtime_error& e) {
+		catch (const std::runtime_error& e) {
 			logger().warn("file not found: " + file_name.string());
 			content = "<h1>404 Not Found</h1>";
 			status_code = status_code::not_found;
@@ -180,11 +180,11 @@ namespace server
 
 	void http::set_root_dir(const std::string& root_dir_)
 	{
-		std::filesystem::path path = std::filesystem::canonical(root_dir_);
-		if (!std::filesystem::exists(path))
+		if (!std::filesystem::exists(root_dir_))
 		{
 			throw std::runtime_error("root directory not found: " + root_dir_);
 		}
+		std::filesystem::path path = std::filesystem::canonical(root_dir_);
 		_root_dir = path;
 	}
 
