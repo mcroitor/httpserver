@@ -69,9 +69,16 @@ docker-compose up -d
 
 ## TODO
 
-- ~~config file~~
-- ~~check config~~
-- start arguments
-- definitions to config file
-- proxy
-- logging
+- [x] config file
+- [x] check config
+- [ ] start arguments
+- [ ] definitions to config file
+- [ ] proxy
+- [ ] logging
+- [x] prevent Directory Traversal attacks
+- [ ] validate HTTP request size
+- [ ] buffer overflows prevention
+- [ ] HTTP headers validation
+- [ ] multi-threading
+- [ ] fix socket leaks
+- [ ] graceful shutdown

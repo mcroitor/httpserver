@@ -1,4 +1,5 @@
 #include <fstream>
+#include <filesystem>
 #include <iomanip>
 #include <ctime>
 
@@ -88,7 +89,13 @@ namespace server
     {
         std::string str = "";
 
-        std::ifstream file(file_name);
+        std::filesystem::path path(file_name);
+        if (!std::filesystem::exists(path))
+        {
+            throw std::runtime_error("file not found: " + file_name);
+        }
+
+        std::ifstream file(path,  std::ios::in | std::ios::binary);
 
         if (file.is_open())
         {
@@ -98,7 +105,25 @@ namespace server
             file.read(&str[0], str.size());
             file.close();
         }
+        else
+        {
+            throw std::runtime_error("cannot open file: " + file_name);
+        }
         return str;
+    }
+
+    bool is_not_traversal(const std::filesystem::path &path, const std::filesystem::path &root_dir)
+    {
+        // root_dir must be prefix of path
+        return path.string().find(root_dir.string()) == 0;
+    }
+
+    bool is_not_traversal(const std::string &path, const std::string &root_dir)
+    {
+        std::filesystem::path full_path(path);
+        std::filesystem::path root(root_dir);
+
+        return is_not_traversal(full_path, root);
     }
 
     std::string extension(const std::string &file_name)

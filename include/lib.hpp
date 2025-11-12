@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <cstdint>
+#include <filesystem>
 
 namespace server
 {
@@ -26,6 +27,7 @@ namespace server
 		ok = 200,
 		bad_request = 400,
 		not_found = 404,
+		access_denied = 403,
 		internal_server_error = 500
 	};
 
@@ -33,6 +35,7 @@ namespace server
 		{status_code::ok, "OK"},
 		{status_code::bad_request, "Bad Request"},
 		{status_code::not_found, "Not Found"},
+		{status_code::access_denied, "Access Denied"},
 		{status_code::internal_server_error, "Internal Server Error"}};
 
 	const std::vector<std::string> keys = {
@@ -85,6 +88,7 @@ namespace server
 	 * @return std::string
 	 */
 	std::string trim(const std::string &str, const std::string &whitespace = " \t\n\r\v\f");
+	
 	/**
 	 * @brief explode a string in chunks by delimiter.
 	 *
@@ -93,6 +97,7 @@ namespace server
 	 * @return std::vector<std::string>
 	 */
 	std::vector<std::string> explode(const std::string &str, const std::string &delimiter = " ");
+	
 	/**
 	 * @brief load data from file
 	 *
@@ -100,6 +105,27 @@ namespace server
 	 * @return std::string
 	 */
 	std::string file_get_contents(const std::string &file_name);
+	
+	/**
+	 * @brief check if path is not directory traversal
+	 *
+	 * @param path
+	 * @param root_dir
+	 * @return true
+	 * @return false
+	 */
+	bool is_not_traversal(const std::filesystem::path &path, const std::filesystem::path &root_dir);
+
+	/**
+	 * @brief check if path is not directory traversal
+	 *
+	 * @param path
+	 * @param root_dir
+	 * @return true
+	 * @return false
+	 */
+	bool is_not_traversal(const std::string &path, const std::string &root_dir);
+	
 	/**
 	 * @brief extract extention from file name
 	 *
