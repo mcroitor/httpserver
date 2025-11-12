@@ -7,7 +7,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN mkdir -p build && cd build && cmake .. && make
+RUN cmake -B build . && cmake --build build
 
 # run unit tests
 FROM build AS test
@@ -18,7 +18,7 @@ WORKDIR /app/tests
 
 COPY tests .
 
-RUN mkdir -p build && cd build && cmake .. && make && ./unittests
+RUN cmake -B build . && cmake --build build && ./build/unittests
 
 # copy application to scratch image
 FROM scratch
@@ -29,6 +29,7 @@ LABEL version="1.0.0"
 
 COPY --from=test /app/build/httpserver /httpserver
 COPY --from=test /app/html /html
+COPY --from=test /app/errors /errors
 COPY --from=test /app/config.ini /config.ini
 
 EXPOSE 8080

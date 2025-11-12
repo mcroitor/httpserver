@@ -22,6 +22,11 @@ namespace server
      */
     const std::string DEFAULT_ROOT_DIR = "./html/";
     /**
+     * @brief Default error pages directory, `./errors/`.
+     * 
+     */
+    const std::string DEFAULT_ERROR_DIR = "./errors/";
+    /**
      * @brief Buffer size (max size of request data read).
      * 
      */

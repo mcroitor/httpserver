@@ -1,5 +1,5 @@
 # CMake version check
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10)
 
 # Create project "server"
 project(httpserver
@@ -25,10 +25,3 @@ add_executable(httpserver ${SOURCE_FILES})
 set(INCLUDE_DIR include/)
 target_include_directories(httpserver PRIVATE ${INCLUDE_DIR})
 target_link_libraries(httpserver -static)
-
-# PVS Studio analysis
-# include (pvs/PVS-Studio.cmake)
-# pvs_studio_add_target(TARGET server.analyze ALL
-#                      OUTPUT FORMAT errorfile
-#                      ANALYZE ${PROJECT_NAME} server.lib:src
-#                      LOG target.err)
